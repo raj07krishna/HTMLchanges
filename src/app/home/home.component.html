@@ -1,0 +1,38 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" opened="true">
+        <mat-nav-list class="flex-col">
+            <div *ngFor="let file of fileNames">
+                <mat-checkbox [disabled]="selectedCount === 2 && !(firstFileName ===file || secondFileName === file)"
+                    (change)="setComparison($event.checked, file)">
+                    <mat-list-item mat-list-item> {{file}}
+
+                    </mat-list-item>
+
+                </mat-checkbox>
+                <mat-divider></mat-divider>
+            </div>
+
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div style="height: 88vh;">
+            <div class="flex-row">
+                <button mat-raised-button (click)="saveHtml()">Save</button>
+
+            </div>
+            <br>
+            <!-- <mat-form-field appearance="outline" style="width: 90%;">
+                <textarea matInput name="questionText" rows="25" placeholder="Write HTML code"
+                    [matTextareaAutosize]="true" [value]="htmlValue" (change)="update($event)"></textarea>
+            </mat-form-field> -->
+            <ckeditor [(ngModel)]="htmlValue"></ckeditor>
+            <br>
+            <button mat-raised-button (click)="showChanges()">Show Changes</button>
+
+            <br>
+
+            <div *ngIf="html" [innerHtml]="html"></div>
+
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
